@@ -2,21 +2,39 @@ import React, { useState } from 'react';
 
 const Problem1 = () => {
     const [inputValue, setInputValue] = useState([])
-    console.log(inputValue);
+    const [show, setShow] = useState('all');
+    const handleClick = (val) => {
+        setShow(val);
+    }
 
     const handleForm = event => {
         event.preventDefault();
         const form = event.target
         const name = form.name.value;
         const status = form.status.value;
-        setInputValue([...inputValue, { name: name, status: status }])
-        
-    }
-    const [show, setShow] = useState('all');
+        const inputStatus = { name: name, status: status }
+        setInputValue([...inputValue, inputStatus])
 
-    const handleClick = (val) => {
-        setShow(val);
     }
+
+
+    const handleStatusField = inputValue.filter(item => {
+        if (show === "all") {
+            return true;
+        }
+        else {
+            return item.status.toLowerCase() === show;
+        }
+    })
+        .sort((a, b) => {
+            if (a.status.toLowerCase() === "active" && b.status.toLowerCase() === "completed") {
+                return -1;
+            } else if (a.status.toLowerCase() === "completed" && b.status.toLowerCase() === "active") {
+                return 1; 
+            } else {
+                return 0; 
+            }
+        });
 
     return (
 
@@ -58,7 +76,7 @@ const Problem1 = () => {
                         </thead>
                         <tbody>
                             {
-                                inputValue.map(value => <tr>
+                                handleStatusField.map((value, i) => <tr key={i}>
                                     <th>{value.name}</th>
                                     <th>{value.status}</th>
                                 </tr>)
