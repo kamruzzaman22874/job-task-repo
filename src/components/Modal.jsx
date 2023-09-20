@@ -2,8 +2,9 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ShowModal({ show, setShow }) {
+function ShowModal({ show, setShow, setInnerShow }) {
     // const [show, setShow] = useState(false);
+    const handleShow = () => setInnerShow(true);
 
     const handleClose = () => setShow(false);
     
@@ -16,7 +17,7 @@ function ShowModal({ show, setShow }) {
                 </Modal.Header>
                 
                 <Modal.Footer>
-                    <Button variant="secondary" >
+                    <Button onClick={handleShow} variant="secondary" >
                         All Contact
                     </Button>
                     <Button variant="primary">

@@ -26,8 +26,8 @@ const Problem2 = () => {
                 </div>
 
             </div>
-            <ShowModal show={show} setShow={setShow} />
-            <ShowModal2 show={show2} setShow={setShow2} />
+            <ShowModal show={show} setShow={setShow} setInnerShow={setShow2} />
+            <ShowModal2 show={show2} setShow={setShow2} setInnerShow={setShow} />
         </div>
     );
 };
